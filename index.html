@@ -6,32 +6,34 @@
   <title>Weather Dashboard</title>
 </head>
 <body>
-  <header>
+  <header class="container-fluid text-center text-black bg-light p-2">
     <h1>Weather Dashboard</h1>
   </header>
-  <div class="container-fluid" style="max-width: 1400px">
+  <div class="container-fluid">
     <div class="row">
       <aside class="col-lg-3 pb-3">
-        <h2 id="form-heading" class="mt-1 h3 form-label">
+        <h2 class="mt-1 h3 form-label">
           Search for a City:
         </h2>
-        <form>
-          <div>
+        <form class="form-inline form-group">
+          <div class="input-group">
             <div>
               <input type="text" id="search-input" />
               <div>
                 <button type="submit">
                   Search
                 </button>
-                <hr />
+                <hr class="hr" />
               </div>
             </div>
           </div>
         </form>
-        <div></div>
+        <div class="list-group"></div>
       </aside>
-      <div>
+      <div class="col-lg-9 pb-3">
+        <!-- This section will be for today weather -->
         <section></section>
+        <!-- This section will be for forecasted weather -->
         <section></section>
       </div>
     </div>
