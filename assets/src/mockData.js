@@ -1,4 +1,4 @@
-const mockForecastData = {
+const mockWeatherData = {
     "cod": "200",
     "message": 0,
     "cnt": 40,
@@ -1476,24 +1476,10 @@ const mockForecastData = {
 
 const mockGeoLocationData = [
     {
-        "name": "Acworth",
-        "lat": 34.0659329,
-        "lon": -84.6768796,
+        "name": "Kennesaw",
+        "lat": 34.0234337,
+        "lon": -84.6154897,
         "country": "US",
         "state": "Georgia"
-    },
-    {
-        "name": "Acworth",
-        "lat": 43.218187,
-        "lon": -72.292099,
-        "country": "US",
-        "state": "New Hampshire"
-    },
-    {
-        "name": "Acworth",
-        "lat": 33.774275,
-        "lon": -94.9496656,
-        "country": "US",
-        "state": "Texas"
     }
 ]
