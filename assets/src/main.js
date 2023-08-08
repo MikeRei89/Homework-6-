@@ -14,6 +14,16 @@ const getWeatherDataByCoords = (lat, lon) => {
     return mockWeatherData;
 }
 
+const showWeatherInfo = () => {
+    $(currentDisplayEl).show();
+    $(forecastDisplayEl).show();
+}
+
+const hideWeatherInfo = () => {
+    $(currentDisplayEl).hide();
+    $(forecastDisplayEl).hide();
+}
+
 const displayLocationInfo = (city, data) => {
     const htmlResult = `
     <div class="card">
@@ -55,3 +65,15 @@ const displayForecastInfo = (data) => {
     `
     forecastDisplayEl.innerHTML = displayResult
 }
+
+const processWeather = (search) => {
+    hideWeatherInfo();
+    displayLocationInfo(search,mockWeatherData.list[0])
+    displayForecastInfo(mockWeatherData.list)
+    showWeatherInfo();
+}
+
+$("#form-weather").on("submit",(event) => {
+    event.preventDefault();
+    processWeather("Cartersville")
+})
