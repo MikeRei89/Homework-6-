@@ -28,7 +28,7 @@ const displayLocationInfo = (city, data) => {
     const htmlResult = `
     <div class="card">
         <div class="card-body">
-        <h2 class="h3 card-title">${city} (9/16/2023)</h2>
+        <h2 class="h3 card-title">${city} (${formatWeatherDate(data.dt_txt)})</h2>
         <p class="card-text">Temp: ${data.main.temp}°F</p>
         <p class="card-text">Wind: ${data.wind.speed} MPH</p>
         <p class="card-text">Humidity: ${data.main.humidity} %</p>
@@ -46,7 +46,7 @@ const displayForecastInfo = (data) => {
     <div class="col-md five-day-card">
        <div class="card bg-primary h-100 text-white">
           <div class="card-body p-2">
-            <h5 class="card-title">9/17/2023</h5>
+            <h5 class="card-title">${ formatWeatherDate(weather.dt_txt)}</h5>
             <p class="card-text">Temp: ${weather.main.temp} °F</p>
             <p class="card-text">Wind: ${weather.wind.speed} MPH</p>
             <p class="card-text">Humidity: ${weather.main.humidity} %</p>
@@ -95,6 +95,10 @@ const renderSearchButton = (search) => {
     `
     $("#weather-history").append(btnHtml)
 }
+
+const formatWeatherDate = (dateText) => {
+    return moment(dateText).format("L LT")
+} 
 
 $("#form-weather").on("submit",(event) => {
     event.preventDefault();
