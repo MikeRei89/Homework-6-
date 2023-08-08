@@ -35,7 +35,6 @@ const displayLocationInfo = (city, data) => {
         </div>
     </div>   
     `
-    console.log(data)
     currentDisplayEl.innerHTML = htmlResult;
 }
 
@@ -99,8 +98,10 @@ const renderSearchButton = (search) => {
 
 $("#form-weather").on("submit",(event) => {
     event.preventDefault();
-    processWeather("Cartersville")
-    updateSearchHistory("Cartersville")
+    const weatherSearch = $("#search-input").val()
+    if (weatherSearch === '') return;
+    processWeather(weatherSearch)
+    updateSearchHistory(weatherSearch)
     displaySearchHistory();
 })
 
