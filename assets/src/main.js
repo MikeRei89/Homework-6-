@@ -84,9 +84,23 @@ const updateSearchHistory = (search) => {
     window.localStorage.setItem("weather-history",JSON.stringify(history))
 }
 
+const displaySearchHistory = () => {
+    const history = getSearchHistory()
+    $("#weather-history").html("");
+    history.forEach(weather => renderSearchButton(weather))
+}
+
+const renderSearchButton = (search) => {
+    const btnHtml = `
+    <button type="button" aria-controls="today forecast" class="history-btn btn-history" data-search="${search}">${search}</button>
+    `
+    $("#weather-history").append(btnHtml)
+}
+
 $("#form-weather").on("submit",(event) => {
     event.preventDefault();
     processWeather("Cartersville")
     updateSearchHistory("Cartersville")
+    displaySearchHistory();
 })
 
