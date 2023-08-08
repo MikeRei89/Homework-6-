@@ -73,7 +73,20 @@ const processWeather = (search) => {
     showWeatherInfo();
 }
 
+const getSearchHistory = () => {
+    return window.localStorage.getItem("weather-history") === null ? [] : JSON.parse(window.localStorage.getItem("weather-history"))
+}
+
+const updateSearchHistory = (search) => {
+    const history = getSearchHistory();
+    if (history.length >= 5) history.shift();
+    history.push(search)
+    window.localStorage.setItem("weather-history",JSON.stringify(history))
+}
+
 $("#form-weather").on("submit",(event) => {
     event.preventDefault();
     processWeather("Cartersville")
+    updateSearchHistory("Cartersville")
 })
+
