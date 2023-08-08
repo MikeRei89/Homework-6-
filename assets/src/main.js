@@ -1,4 +1,5 @@
 const currentDisplayEl = document.getElementById("current-display");
+const forecastDisplayEl = document.getElementById("weather-future");
 
 const openWeatherBaseURL = `http://api.openweathermap.org`;
 const weatherAPI = `API HERE`;
@@ -26,4 +27,31 @@ const displayLocationInfo = (city, data) => {
     `
     console.log(data)
     currentDisplayEl.innerHTML = htmlResult;
+}
+
+const displayForecastInfo = (data) => {
+    let forecastCardHTML = '';
+
+    data.forEach(weather => {
+        forecastCardHTML += `
+    <div class="col-md five-day-card">
+       <div class="card bg-primary h-100 text-white">
+          <div class="card-body p-2">
+            <h5 class="card-title">9/17/2023</h5>
+            <p class="card-text">Temp: ${weather.main.temp} °F</p>
+            <p class="card-text">Wind: ${weather.wind.speed} MPH</p>
+            <p class="card-text">Humidity: ${weather.main.humidity} %</p>
+          </div>
+        </div>
+    </div>                
+        `
+    })
+
+    const displayResult = `
+    <div class="col-12">
+        <h4>5-Day Forecast:</h4>
+    </div>
+    ${forecastCardHTML}
+    `
+    forecastDisplayEl.innerHTML = displayResult
 }

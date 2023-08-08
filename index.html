@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <header class="container-fluid text-center text-black bg-light p-2">
+  <header class="container-fluid text-center text-white bg-dark p-2">
     <h1>Weather Dashboard</h1>
   </header>
   <div class="container-fluid">
@@ -19,9 +19,9 @@
         <form class="form-inline form-group">
           <div class="input-group">
             <div>
-              <input type="text" id="search-input" />
+              <input class="form-input" type="text" id="search-input" />
               <div>
-                <button type="submit">
+                <button type="submit" class="btn search-button">
                   Search
                 </button>
                 <hr class="hr" />
@@ -35,7 +35,7 @@
         <!-- This section will be for today weather -->
         <section id="current-display"></section>
         <!-- This section will be for forecasted weather -->
-        <section id="weather-future"></section>
+        <section id="weather-future" class="row mt-3"></section>
       </div>
     </div>
   </div>
