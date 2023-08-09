@@ -71,6 +71,8 @@ const displayForecastInfo = (data) => {
 
 const processWeather = async (search) => {
 
+    hideWeatherInfo();
+
     try {
 
         const geoData = await getLocationCoords(search)
@@ -84,8 +86,6 @@ const processWeather = async (search) => {
         alert(err)
         console.error(err)
     }
-
-    hideWeatherInfo();
 
 }
 
