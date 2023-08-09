@@ -4,14 +4,18 @@ const forecastDisplayEl = document.getElementById("weather-future");
 const openWeatherBaseURL = `http://api.openweathermap.org`;
 const weatherAPI = `API HERE`;
 
-const getLocationCoords = (search) => {
+const getLocationCoords = async (search) => {
     const url = `${openWeatherBaseURL}/geo/1.0/direct?appid=${weatherAPI}&q=${search}&limit=1`;
-    return mockGeoLocationData[0]; //Mock data for now..    
+    const data = await $.ajax(url)
+    //return mockGeoLocationData[0]; //Mock data for now..    
+    return data?.length > 0 ? data[0] : {};
 }
 
-const getWeatherDataByCoords = (lat, lon) => {
+const getWeatherDataByCoords = async (lat, lon) => {
     const url = `${openWeatherBaseURL}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${weatherAPI}`
-    return mockWeatherData;
+    const data = await $.ajax(url)
+    //return mockWeatherData;
+    return data;
 }
 
 const showWeatherInfo = () => {
@@ -46,7 +50,7 @@ const displayForecastInfo = (data) => {
     <div class="col-md five-day-card">
        <div class="card bg-primary h-100 text-white">
           <div class="card-body p-2">
-            <h5 class="card-title">${ formatWeatherDate(weather.dt_txt)}</h5>
+            <h5 class="card-title">${formatWeatherDate(weather.dt_txt)}</h5>
             <p class="card-text">Temp: ${weather.main.temp} °F</p>
             <p class="card-text">Wind: ${weather.wind.speed} MPH</p>
             <p class="card-text">Humidity: ${weather.main.humidity} %</p>
@@ -65,11 +69,24 @@ const displayForecastInfo = (data) => {
     forecastDisplayEl.innerHTML = displayResult
 }
 
-const processWeather = (search) => {
+const processWeather = async (search) => {
+
+    try {
+
+        const geoData = await getLocationCoords(search)
+        const weatherData = await getWeatherDataByCoords(geoData.lat, geoData.lon);
+
+        displayLocationInfo(search, weatherData.list[0])
+        displayForecastInfo(weatherData.list)
+        showWeatherInfo();
+
+    } catch (err) {
+        alert(err)
+        console.error(err)
+    }
+
     hideWeatherInfo();
-    displayLocationInfo(search,mockWeatherData.list[0])
-    displayForecastInfo(mockWeatherData.list)
-    showWeatherInfo();
+
 }
 
 const getSearchHistory = () => {
@@ -80,7 +97,7 @@ const updateSearchHistory = (search) => {
     const history = getSearchHistory();
     if (history.length >= 5) history.shift();
     history.push(search)
-    window.localStorage.setItem("weather-history",JSON.stringify(history))
+    window.localStorage.setItem("weather-history", JSON.stringify(history))
 }
 
 const displaySearchHistory = () => {
@@ -98,9 +115,9 @@ const renderSearchButton = (search) => {
 
 const formatWeatherDate = (dateText) => {
     return moment(dateText).format("L LT")
-} 
+}
 
-$("#form-weather").on("submit",(event) => {
+$("#form-weather").on("submit", (event) => {
     event.preventDefault();
     const weatherSearch = $("#search-input").val()
     if (weatherSearch === '') return;
