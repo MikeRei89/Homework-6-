@@ -1,5 +1,6 @@
 const currentDisplayEl = document.getElementById("current-display");
 const forecastDisplayEl = document.getElementById("weather-future");
+const searchHistoryEl = document.getElementById("weather-history")
 
 const openWeatherBaseURL = `http://api.openweathermap.org`;
 const weatherAPI = `API HERE`;
@@ -126,3 +127,10 @@ $("#form-weather").on("submit", (event) => {
     displaySearchHistory();
 })
 
+$(searchHistoryEl).click((event) => {
+    event.preventDefault();
+    const city = $(event.target).data('search')
+    processWeather(city)
+})
+
+displaySearchHistory()
