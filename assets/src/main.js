@@ -3,7 +3,7 @@ const forecastDisplayEl = document.getElementById("weather-future");
 const searchHistoryEl = document.getElementById("weather-history")
 
 const openWeatherBaseURL = `http://api.openweathermap.org`;
-const weatherAPI = `API HERE`;
+const weatherAPI = `4aab759f8f05ef3bc1f3a92928631206`;
 
 const getLocationCoords = async (search) => {
     const url = `${openWeatherBaseURL}/geo/1.0/direct?appid=${weatherAPI}&q=${search}&limit=1`;
