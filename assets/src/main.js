@@ -2,7 +2,7 @@ const currentDisplayEl = document.getElementById("current-display");
 const forecastDisplayEl = document.getElementById("weather-future");
 const searchHistoryEl = document.getElementById("weather-history")
 
-const openWeatherBaseURL = `http://api.openweathermap.org`;
+const openWeatherBaseURL = `https://api.openweathermap.org`;
 const weatherAPI = `4aab759f8f05ef3bc1f3a92928631206`;
 
 const getLocationCoords = async (search) => {
